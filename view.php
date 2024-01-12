@@ -8,6 +8,14 @@
 	<title>Game</title>
 </head>
 <body>
-	<!-- TODO: add a form for the user to play the game -->
+	<h1>Language Quiz</h1>
+	<h2>Translate this Dutch word to English.</h2>
+    <p>Dutch: <strong><?= $_SESSION["Word"]->getDutchTranslation()?></strong></p>
+    <form method="POST">
+        <label for="english-translation">English:</label>
+        <input id="english-translation" name="player-input">
+		<br>
+        <button type="submit">Verify your answer</button>
+    </form>
 </body>
 </html>
