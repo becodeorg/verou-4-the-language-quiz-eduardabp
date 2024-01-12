@@ -14,7 +14,7 @@
     <form method="POST">
         <label for="english-translation">English:</label>
         <input id="english-translation" name="player-input">
-		<br>
+		<br><br>
         <button type="submit">Verify your answer</button>
     </form>
 </body>
