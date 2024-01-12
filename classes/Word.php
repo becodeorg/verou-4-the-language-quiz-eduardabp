@@ -2,12 +2,31 @@
 
 class Word
 {
-    // TODO: add word (FR) and answer (EN) - (via constructor or not? why?)
+    private string $dutchTranslation;
+    private string $englishTranslation;
 
-    public function verify(string $answer): bool
+    public function __construct($dutchTranslation, $englishTranslation)
     {
-        // TODO: use this function to verify if the provided answer by the user matches the correct one
+        $this->dutchTranslation = $dutchTranslation;
+        $this->englishTranslation = $englishTranslation;
+    }
+
+    public function verify(string $answer)
+    {  
+        $correctAnswer = $this->englishTranslation;
+        $userInput = $answer;
+
+       if ($correctAnswer === $userInput) {
+        echo "You did it! " . $this->dutchTranslation . " is " . $this->englishTranslation . ". Congratulations!";
+       } else {
+        echo "Oh, no! That is not the correct answer. Try again!";
+       }
         // Bonus: allow answers with different casing (example: both bread or Bread can be correct answers, even though technically it's a different string)
         // Bonus (hard): can you allow answers with small typo's (max one character different)?
+    }
+
+    public function getDutchTranslation()
+    {
+       return $this->dutchTranslation;
     }
 }
