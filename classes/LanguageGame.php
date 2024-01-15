@@ -48,7 +48,8 @@ class LanguageGame
                     $this->incrementScore();
                     echo "Your score: " . $this->getScore();
                 } else {
-                    echo "Oh, no! That is not the correct answer. Try again!";
+                    echo "Oh, no! That is not the correct answer. Try again!<br>";
+                    echo "Your score: " . $this->getScore();
                 };
                 $_SESSION['Word'] = $this->randomWord();
             }
