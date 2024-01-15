@@ -20,6 +20,18 @@ class LanguageGame
         return $this->word;
     }
 
+ // increment the score
+    private function incrementScore()
+    {
+        $_SESSION["Score"] = isset($_SESSION["Score"]) ? ($_SESSION["Score"] + 1) : 1;
+    }
+
+    // get the current score
+    public function getScore()
+    {
+        return isset($_SESSION["Score"]) ? $_SESSION["Score"] : 0;
+    }
+
     public function run(): void
     {
         session_start();
@@ -29,7 +41,9 @@ class LanguageGame
             $_SESSION["Word"] = $this->word;
         } elseif ($_SERVER["REQUEST_METHOD"] === "POST") {
             if ($_SESSION["Word"]->verify($_POST['player-input']) === true) {
-                echo "You did it, " . $_SESSION['Word'] . " is " . $_POST['player-input'] . "! Congratulations!";
+                echo "You did it, " . $_SESSION['Word'] . " is " . $_POST['player-input'] . "! Congratulations!<br>";
+                $this->incrementScore();
+                echo "Your score: " . $this->getScore();
             } else {
                 echo "Oh, no! That is not the correct answer. Try again!";
             };
