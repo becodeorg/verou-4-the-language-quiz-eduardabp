@@ -21,15 +21,25 @@ class LanguageGame
     }
 
  // increment the score
-    private function incrementScore()
+    private function incrementScoreForRight()
     {
-        $_SESSION["Score"] = isset($_SESSION["Score"]) ? ($_SESSION["Score"] + 1) : 1;
+        $_SESSION["ScoreForRight"] = isset($_SESSION["ScoreForRight"]) ? ($_SESSION["ScoreForRight"] + 1) : 1;
+    }
+
+    private function incrementScoreForWrong()
+    {
+        $_SESSION["ScoreForWrong"] = isset($_SESSION["ScoreForWrong"]) ? ($_SESSION["ScoreForWrong"] + 1) : 1;
     }
 
     // get the current score
-    public function getScore()
+    public function getScoreForRight()
     {
-        return isset($_SESSION["Score"]) ? $_SESSION["Score"] : 0;
+        return isset($_SESSION["ScoreForRight"]) ? $_SESSION["ScoreForRight"] : 0;
+    }
+
+    public function getScoreForWrong()
+    {
+        return isset($_SESSION["ScoreForWrong"]) ? $_SESSION["ScoreForWrong"] : 0;
     }
 
     public function run(): void
@@ -41,15 +51,17 @@ class LanguageGame
             $_SESSION["Word"] = $this->word;
         } elseif ($_SERVER["REQUEST_METHOD"] === "POST") {
             if(isset($_POST["reset"])) {
-                $_SESSION["Score"] = 0;
+                $_SESSION["ScoreForRight"] = 0;
+                $_SESSION["ScoreForWrong"] = 0;
             } else {
                 if ($_SESSION["Word"]->verify($_POST['player-input']) === true) {
                     echo "You did it, " . $_SESSION['Word'] . " is " . $_POST['player-input'] . "! Congratulations!<br>";
-                    $this->incrementScore();
-                    echo "Your score: " . $this->getScore();
+                    $this->incrementScoreForRight();
+                    echo "Scoreboard:<br>Right answers: " . $this->getScoreForRight() . "<br>Wrong answers: " . $this->getScoreForWrong();
                 } else {
                     echo "Oh, no! That is not the correct answer. Try again!<br>";
-                    echo "Your score: " . $this->getScore();
+                    $this->incrementScoreForWrong();
+                    echo "Scoreboard:<br>Right answers: " . $this->getScoreForRight() . "<br>Wrong answers: " . $this->getScoreForWrong();
                 };
                 $_SESSION['Word'] = $this->randomWord();
             }
