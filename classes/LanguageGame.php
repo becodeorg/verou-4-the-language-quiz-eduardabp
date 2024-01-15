@@ -40,14 +40,18 @@ class LanguageGame
             $this->word = $this->randomWord();
             $_SESSION["Word"] = $this->word;
         } elseif ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if ($_SESSION["Word"]->verify($_POST['player-input']) === true) {
-                echo "You did it, " . $_SESSION['Word'] . " is " . $_POST['player-input'] . "! Congratulations!<br>";
-                $this->incrementScore();
-                echo "Your score: " . $this->getScore();
+            if(isset($_POST["reset"])) {
+                $_SESSION["Score"] = 0;
             } else {
-                echo "Oh, no! That is not the correct answer. Try again!";
-            };
-            $_SESSION['Word'] = $this->randomWord();
+                if ($_SESSION["Word"]->verify($_POST['player-input']) === true) {
+                    echo "You did it, " . $_SESSION['Word'] . " is " . $_POST['player-input'] . "! Congratulations!<br>";
+                    $this->incrementScore();
+                    echo "Your score: " . $this->getScore();
+                } else {
+                    echo "Oh, no! That is not the correct answer. Try again!";
+                };
+                $_SESSION['Word'] = $this->randomWord();
+            }
         }
     }
 }

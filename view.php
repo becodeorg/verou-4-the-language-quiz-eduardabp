@@ -16,6 +16,7 @@
         <input id="english-translation" name="player-input">
 		<br><br>
         <button type="submit">Verify your answer</button>
+		<button type="submit" name="reset">Reset your score</button>
     </form>
 </body>
 </html>
