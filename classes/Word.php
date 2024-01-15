@@ -11,18 +11,23 @@ class Word
         $this->englishTranslation = $englishTranslation;
     }
 
-    public function verify(string $answer)
+    public function verify(string $answer): bool
     {  
         $correctAnswer = $this->englishTranslation;
         $userInput = $answer;
 
        if ($correctAnswer === $userInput) {
-        echo "You did it! " . $this->dutchTranslation . " is " . $this->englishTranslation . ". Congratulations!";
+        return true;
        } else {
-        echo "Oh, no! That is not the correct answer. Try again!";
+        return false;
        }
         // Bonus: allow answers with different casing (example: both bread or Bread can be correct answers, even though technically it's a different string)
         // Bonus (hard): can you allow answers with small typo's (max one character different)?
+    }
+
+    public function __toString()
+    {
+        return $this->dutchTranslation;
     }
 
     public function getDutchTranslation()

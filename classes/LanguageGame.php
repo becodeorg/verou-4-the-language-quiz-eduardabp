@@ -28,7 +28,11 @@ class LanguageGame
             $this->word = $this->randomWord();
             $_SESSION["Word"] = $this->word;
         } elseif ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $_SESSION["Word"]->verify($_POST['player-input']);
+            if ($_SESSION["Word"]->verify($_POST['player-input']) === true) {
+                echo "You did it, " . $_SESSION['Word'] . " is " . $_POST['player-input'] . "! Congratulations!";
+            } else {
+                echo "Oh, no! That is not the correct answer. Try again!";
+            };
             $_SESSION['Word'] = $this->randomWord();
         }
     }
