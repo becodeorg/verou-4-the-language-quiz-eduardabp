@@ -54,8 +54,9 @@ class LanguageGame
                 $_SESSION["ScoreForRight"] = 0;
                 $_SESSION["ScoreForWrong"] = 0;
             } else {
-                if ($_SESSION["Word"]->verify($_POST['player-input']) === true) {
-                    echo "You did it, " . $_SESSION['Word'] . " is " . $_POST['player-input'] . "! Congratulations!<br>";
+                $playerAnswer = strtolower($_POST['player-input']);
+                if ($_SESSION["Word"]->verify($playerAnswer) === true) {
+                    echo "You did it, " . $_SESSION['Word'] . " is " . $playerAnswer . "! Congratulations!<br>";
                     $this->incrementScoreForRight();
                     echo "Scoreboard:<br>Right answers: " . $this->getScoreForRight() . "<br>Wrong answers: " . $this->getScoreForWrong();
                 } else {
